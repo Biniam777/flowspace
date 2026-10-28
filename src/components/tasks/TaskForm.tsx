@@ -1,6 +1,6 @@
-
 import { useState, type FormEvent } from 'react'
 import { useProjectStore } from '../../stores/projectStore'
+import { useSettingsStore } from '../../stores/settingsStore'
 import type {
   CreateTaskInput,
   Task,
@@ -33,11 +33,20 @@ export default function TaskForm({
 }: TaskFormProps) {
   const projects = useProjectStore((state) => state.projects)
 
+  const defaultTaskStatus = useSettingsStore(
+    (state) => state.defaultTaskStatus,
+  )
+  const defaultTaskPriority = useSettingsStore(
+    (state) => state.defaultTaskPriority,
+  )
+
   const [title, setTitle] = useState(task?.title ?? '')
   const [description, setDescription] = useState(task?.description ?? '')
-  const [status, setStatus] = useState<TaskStatus>(task?.status ?? 'todo')
+  const [status, setStatus] = useState<TaskStatus>(
+    task?.status ?? defaultTaskStatus,
+  )
   const [priority, setPriority] = useState<TaskPriority>(
-    task?.priority ?? 'medium',
+    task?.priority ?? defaultTaskPriority,
   )
   const [projectId, setProjectId] = useState(task?.projectId ?? '')
   const [dueDate, setDueDate] = useState(task?.dueDate ?? '')

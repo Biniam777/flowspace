@@ -1,7 +1,12 @@
 import { Outlet } from 'react-router-dom'
 import Sidebar from './Sidebar'
+import { useSettingsStore } from '../../stores/settingsStore'
 
 export default function AppLayout() {
+  const workspaceName = useSettingsStore(
+    (state) => state.workspaceName,
+  )
+
   return (
     <div className="min-h-screen bg-canvas text-ink-950 md:flex">
       <Sidebar />
@@ -12,8 +17,9 @@ export default function AppLayout() {
             <p className="text-xs font-medium text-ink-500 sm:text-sm">
               Your workspace
             </p>
+
             <p className="truncate text-sm font-semibold text-ink-800">
-              Flowspace
+              {workspaceName}
             </p>
           </div>
 

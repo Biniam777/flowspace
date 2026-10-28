@@ -6,7 +6,8 @@
 - CP2 — Design system and application shell: Complete
 - CP3 — Dashboard and project management: Complete
 - CP4 — Task management and Kanban: Complete
-- CP5 — Analytics and settings: In progress
+- CP5 — Analytics and settings: Complete
+- CP6 — Persistence and data management: Next
 
 ## Project direction
 
@@ -43,7 +44,7 @@ and multi-user collaboration are deferred.
 - Refined shared page headings and placeholder cards
 - Production build and ESLint passed
 - Desktop and narrow-screen layouts visually inspected
-- Mobile Settings navigation check remains to be revisited during responsive testing
+- Mobile Settings navigation check remains for responsive testing
 
 ## CP3 — Dashboard and project management
 
@@ -95,8 +96,19 @@ and multi-user collaboration are deferred.
 
 ### Settings
 
-- Settings page implementation and verification remain pending
-- Preserve existing project and task functionality while implementing settings
+- Added a persisted Zustand settings store using the `flowspace-settings` localStorage key
+- Added editable workspace name and description
+- Added configurable default task status and priority
+- Added input validation and character limits
+- Added save feedback and a discard-changes action
+- Added a confirmation step for resetting preferences
+- Confirmed resetting preferences preserves existing projects and tasks
+- Connected the saved workspace name to the application header
+- Connected saved task defaults to new task creation
+- Preserved existing task status and priority when editing tasks
+- Verified saving, refreshing, discarding changes, validation, reset cancellation, and confirmed reset in the browser
+- Verified new tasks use saved defaults and existing tasks retain their values
+- TypeScript, ESLint, and production build checks passed
 
 ## Remaining polish
 
@@ -107,6 +119,6 @@ and multi-user collaboration are deferred.
 
 ## Next checkpoint
 
-Continue CP5 — implement and verify useful settings for the local workspace.
+Begin CP6 — review persistence behavior and implement data management, including JSON export and a carefully confirmed data reset.
 
-After Settings is verified, update this tracker and mark CP5 complete.
+Keep the existing project, task, and settings behavior intact while implementing data management.
