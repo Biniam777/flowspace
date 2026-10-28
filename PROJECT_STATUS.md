@@ -2,9 +2,8 @@
 
 ## Current checkpoint
 
-CP1 — Foundation
-
-Status: Pending final verification and initial Git commit.
+CP1 — Foundation: Complete
+CP2 — Design system and application shell: Pending final browser verification and commit
 
 ## Project direction
 
@@ -23,35 +22,33 @@ and multi-user collaboration are deferred.
 - React Router
 - Git
 
-## Implemented
+## Completed foundation
 
-- Vite React TypeScript starter
-- Tailwind CSS Vite integration
+- React and TypeScript application scaffold
+- Tailwind CSS v4 integration
+- Five application routes
 - Shared application layout and sidebar
-- Routes for Dashboard, Projects, Tasks, Analytics, and Settings
-- Responsive horizontal navigation at narrow widths
-- Page placeholders for future feature work
-- Updated document title and description
+- Initial Git commit on main
 
-## Verified
+## CP2 implementation
 
-- Dependency installation succeeded
-- TypeScript production build succeeded
-- ESLint succeeded
-- Tailwind utility styling confirmed in the browser
-- Dashboard and Analytics visually checked
-- Narrow-screen layout visually checked
+- Added reusable Tailwind design tokens for brand colors, text, surfaces, shadows, and typography
+- Added global sizing, typography, and keyboard focus styles
+- Refined the application header and sidebar
+- Improved active navigation styling and horizontal mobile navigation
+- Refined shared page headings and placeholder cards
 
-## Still to verify
+## Verification
 
-- Confirm each remaining route individually
-- Confirm unknown routes redirect to Dashboard
-- Inspect browser console for runtime errors
-- Create and verify the initial Git commit
+- Production build passes
+- ESLint passes
+- git diff --check passes
+- Desktop and narrow-screen layout visually inspected
+- Final mobile Settings navigation check pending
 
 ## Next checkpoint
 
-CP2 — Design system and polished application shell.
+CP3 — Dashboard and project management.
 
-Planned work includes reusable UI components, consistent typography,
-spacing and colors, improved navigation states, and responsive polish.
+Planned features include project creation, editing, deletion, project status,
+and meaningful dashboard summaries.
