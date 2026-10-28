@@ -5,7 +5,8 @@
 - CP1 — Foundation: Complete
 - CP2 — Design system and application shell: Complete
 - CP3 — Dashboard and project management: Complete
-- CP4 — Task management and Kanban: Next
+- CP4 — Task management and Kanban: Complete
+- CP5 — Analytics and settings: Next
 
 ## Project direction
 
@@ -62,11 +63,31 @@ and multi-user collaboration are deferred.
 - Visually inspected desktop and narrow-screen dashboard layouts
 - ESLint and production build passed
 
+## CP4 — Task management and Kanban
+
+- Added TypeScript task and input types
+- Added a Zustand task store with browser-local persistence
+- Implemented task creation, editing, and deletion
+- Added a three-column Kanban board: To do, In progress, and Done
+- Added task priority indicators, descriptions, project associations, and optional due dates
+- Added task creation and editing forms with validation
+- Added a task deletion confirmation dialog
+- Added task counts and empty states for each Kanban column
+- Verified task creation and editing in the browser
+- Verified task deletion, cancellation, board counts, and persistence after refresh
+- Verified existing task creation and editing still work after deletion changes
+- TypeScript, ESLint, and production build checks passed
+
 ## Remaining polish
 
 - Revisit mobile Settings navigation
-- Continue accessibility and responsive testing as more features are added
+- Continue accessibility and responsive testing
+- Review task-board usability on narrow screens
+- Add automated tests as the application grows
 
 ## Next checkpoint
 
-CP4 — Task management and Kanban, including task data types, task state management, task creation and editing, priorities, due dates, and task status workflows.
+CP5 — Analytics and settings.
+
+Build analytics from actual project and task data, then implement useful settings
+for the local workspace. Keep all existing project and task functionality working.
