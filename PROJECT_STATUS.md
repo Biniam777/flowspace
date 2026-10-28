@@ -2,8 +2,9 @@
 
 ## Current checkpoint
 
-CP1 — Foundation: Complete
-CP2 — Design system and application shell: Pending final browser verification and commit
+- CP1 — Foundation: Complete
+- CP2 — Design system and application shell: Complete
+- CP3 — Dashboard and project management: In progress
 
 ## Project direction
 
@@ -15,11 +16,12 @@ and multi-user collaboration are deferred.
 
 ## Technology
 
-- React
+- React 19
 - TypeScript
 - Vite
 - Tailwind CSS v4
 - React Router
+- Zustand
 - Git
 
 ## Completed foundation
@@ -28,27 +30,36 @@ and multi-user collaboration are deferred.
 - Tailwind CSS v4 integration
 - Five application routes
 - Shared application layout and sidebar
-- Initial Git commit on main
+- Initial Git commit on `main`
 
-## CP2 implementation
+## CP2 — Design system and application shell
 
 - Added reusable Tailwind design tokens for brand colors, text, surfaces, shadows, and typography
 - Added global sizing, typography, and keyboard focus styles
 - Refined the application header and sidebar
-- Improved active navigation styling and horizontal mobile navigation
+- Added active navigation styling and horizontal mobile navigation
 - Refined shared page headings and placeholder cards
+- Production build and ESLint passed
+- Desktop and narrow-screen layouts visually inspected
+- Mobile Settings navigation check remains to be revisited during responsive testing
 
-## Verification
+## CP3 — Project management
 
-- Production build passes
-- ESLint passes
-- git diff --check passes
-- Desktop and narrow-screen layout visually inspected
-- Final mobile Settings navigation check pending
+- Added project and form input TypeScript types
+- Added a Zustand project store with browser-local persistence
+- Implemented project creation, editing, and deletion
+- Added project status, color, description, and optional due date
+- Added project cards, an empty state, and project count
+- Added form validation and delete confirmation
+- Browser-verified creation, editing, deletion, cancellation, validation, and persistence after refresh
+- Production build and ESLint passed
+
+## Remaining CP3 work
+
+- Implement meaningful dashboard summaries
+- Verify the full project flow at narrow mobile widths
+- Review the final changes and commit CP3
 
 ## Next checkpoint
 
-CP3 — Dashboard and project management.
-
-Planned features include project creation, editing, deletion, project status,
-and meaningful dashboard summaries.
+Complete CP3, then move on to task management and Kanban features in CP4.
