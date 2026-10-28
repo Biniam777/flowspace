@@ -4,7 +4,8 @@
 
 - CP1 — Foundation: Complete
 - CP2 — Design system and application shell: Complete
-- CP3 — Dashboard and project management: In progress
+- CP3 — Dashboard and project management: Complete
+- CP4 — Task management and Kanban: Next
 
 ## Project direction
 
@@ -24,7 +25,7 @@ and multi-user collaboration are deferred.
 - Zustand
 - Git
 
-## Completed foundation
+## CP1 — Foundation
 
 - React and TypeScript application scaffold
 - Tailwind CSS v4 integration
@@ -43,7 +44,7 @@ and multi-user collaboration are deferred.
 - Desktop and narrow-screen layouts visually inspected
 - Mobile Settings navigation check remains to be revisited during responsive testing
 
-## CP3 — Project management
+## CP3 — Dashboard and project management
 
 - Added project and form input TypeScript types
 - Added a Zustand project store with browser-local persistence
@@ -51,15 +52,21 @@ and multi-user collaboration are deferred.
 - Added project status, color, description, and optional due date
 - Added project cards, an empty state, and project count
 - Added form validation and delete confirmation
-- Browser-verified creation, editing, deletion, cancellation, validation, and persistence after refresh
-- Production build and ESLint passed
+- Built dashboard summary cards using live project data
+- Added project-status breakdowns and recent-project listings
+- Added dashboard empty states and navigation shortcuts
+- Verified project CRUD, form validation, cancellation, and delete confirmation
+- Verified dashboard metrics and status breakdowns using real project data
+- Verified project status changes update the dashboard
+- Verified project data survives browser refresh
+- Visually inspected desktop and narrow-screen dashboard layouts
+- ESLint and production build passed
 
-## Remaining CP3 work
+## Remaining polish
 
-- Implement meaningful dashboard summaries
-- Verify the full project flow at narrow mobile widths
-- Review the final changes and commit CP3
+- Revisit mobile Settings navigation
+- Continue accessibility and responsive testing as more features are added
 
 ## Next checkpoint
 
-Complete CP3, then move on to task management and Kanban features in CP4.
+CP4 — Task management and Kanban, including task data types, task state management, task creation and editing, priorities, due dates, and task status workflows.
