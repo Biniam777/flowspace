@@ -6,7 +6,7 @@
 - CP2 — Design system and application shell: Complete
 - CP3 — Dashboard and project management: Complete
 - CP4 — Task management and Kanban: Complete
-- CP5 — Analytics and settings: Next
+- CP5 — Analytics and settings: In progress
 
 ## Project direction
 
@@ -78,6 +78,26 @@ and multi-user collaboration are deferred.
 - Verified existing task creation and editing still work after deletion changes
 - TypeScript, ESLint, and production build checks passed
 
+## CP5 — Analytics and settings
+
+### Analytics
+
+- Replaced the Analytics placeholder with data-driven workspace analytics
+- Added total projects, completed projects, total tasks, and task completion metrics
+- Added project status, task status, and priority distributions
+- Added overdue-task counts and upcoming deadlines
+- Excluded completed tasks from overdue and upcoming deadline counts
+- Limited the upcoming-deadline list to five tasks while counting all upcoming tasks
+- Added empty states for missing project and task data
+- Visually inspected the Analytics page in the browser
+- Verified displayed project metrics against the current workspace data
+- TypeScript, ESLint, and production build checks passed
+
+### Settings
+
+- Settings page implementation and verification remain pending
+- Preserve existing project and task functionality while implementing settings
+
 ## Remaining polish
 
 - Revisit mobile Settings navigation
@@ -87,7 +107,6 @@ and multi-user collaboration are deferred.
 
 ## Next checkpoint
 
-CP5 — Analytics and settings.
+Continue CP5 — implement and verify useful settings for the local workspace.
 
-Build analytics from actual project and task data, then implement useful settings
-for the local workspace. Keep all existing project and task functionality working.
+After Settings is verified, update this tracker and mark CP5 complete.
