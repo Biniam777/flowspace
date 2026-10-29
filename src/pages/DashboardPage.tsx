@@ -299,7 +299,7 @@ export default function DashboardPage() {
           </div>
 
           {recentProjects.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-slate-300 px-4 py-10 text-center">
+            <div className="flex flex-col items-center rounded-xl border border-dashed border-slate-300 px-4 py-10 text-center">
               <div
                 aria-hidden="true"
                 className="mx-auto flex size-12 items-center justify-center rounded-xl bg-brand-50 text-xl text-brand-600"
@@ -309,7 +309,7 @@ export default function DashboardPage() {
               <h3 className="mt-4 text-sm font-semibold text-ink-800">
                 No projects to show yet
               </h3>
-              <p className="mx-auto mt-2 max-w-xs text-sm leading-6 text-ink-500">
+              <p className="mx-auto mt-2 w-full max-w-xs text-center text-sm leading-6 text-ink-500">
                 Create your first project to see its status and details here.
               </p>
               <Link
