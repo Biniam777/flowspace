@@ -1,4 +1,3 @@
-
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import type {
@@ -12,6 +11,7 @@ type TaskStore = {
   addTask: (input: CreateTaskInput) => Task
   updateTask: (id: string, input: UpdateTaskInput) => void
   deleteTask: (id: string) => void
+  clearTasks: () => void
   getTask: (id: string) => Task | undefined
 }
 
@@ -59,6 +59,10 @@ export const useTaskStore = create<TaskStore>()(
         set((state) => ({
           tasks: state.tasks.filter((task) => task.id !== id),
         }))
+      },
+
+      clearTasks: () => {
+        set({ tasks: [] })
       },
 
       getTask: (id) => get().tasks.find((task) => task.id === id),

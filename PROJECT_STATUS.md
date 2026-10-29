@@ -7,7 +7,7 @@
 - CP3 — Dashboard and project management: Complete
 - CP4 — Task management and Kanban: Complete
 - CP5 — Analytics and settings: Complete
-- CP6 — Persistence and data management: Next
+- CP6 — Persistence and data management: In progress
 
 ## Project direction
 
@@ -110,6 +110,32 @@ and multi-user collaboration are deferred.
 - Verified new tasks use saved defaults and existing tasks retain their values
 - TypeScript, ESLint, and production build checks passed
 
+## CP6 — Persistence and data management
+
+### Workspace export
+
+- Added a typed versioned JSON backup format
+- Included projects, tasks, workspace preferences, and export timestamp
+- Added a reusable workspace backup creation utility
+- Added a workspace export action to Settings
+- Included current project and task counts in the export section
+- Downloaded a backup in the browser
+- Verified the downloaded file is valid JSON
+- Inspected the exported project, task, and settings data
+
+### Workspace reset
+
+- Added actions to clear all projects and all tasks from their Zustand stores
+- Added a full workspace reset option to Settings
+- Added a confirmation dialog that displays current project and task counts
+- Clearly warned that deletion is permanent and recommended exporting a backup first
+- Verified the confirmation dialog displays the correct counts
+- Verified cancelling the full reset preserves existing data
+- Verified confirming the reset clears projects and tasks
+- Verified empty-state behavior and default settings after reset
+- Verified cleared data and default settings persist after browser refresh
+- TypeScript, ESLint, and production build checks passed
+
 ## Remaining polish
 
 - Revisit mobile Settings navigation
@@ -119,6 +145,8 @@ and multi-user collaboration are deferred.
 
 ## Next checkpoint
 
-Begin CP6 — review persistence behavior and implement data management, including JSON export and a carefully confirmed data reset.
+Finish CP6 by reviewing the final changes, committing the verified data-management features, and confirming the repository is clean.
 
-Keep the existing project, task, and settings behavior intact while implementing data management.
+Then begin CP7 — responsive design, accessibility, automated tests, and final polish.
+
+Keep existing project, task, and settings behavior intact while implementing further improvements.

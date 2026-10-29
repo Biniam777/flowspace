@@ -11,6 +11,7 @@ type ProjectStore = {
   addProject: (input: CreateProjectInput) => Project
   updateProject: (id: string, input: UpdateProjectInput) => void
   deleteProject: (id: string) => void
+  clearProjects: () => void
   getProject: (id: string) => Project | undefined
 }
 
@@ -58,6 +59,10 @@ export const useProjectStore = create<ProjectStore>()(
         set((state) => ({
           projects: state.projects.filter((project) => project.id !== id),
         }))
+      },
+
+      clearProjects: () => {
+        set({ projects: [] })
       },
 
       getProject: (id) => get().projects.find((project) => project.id === id),

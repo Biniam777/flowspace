@@ -1,5 +1,11 @@
 import { useState, type FormEvent } from 'react'
 import { useSettingsStore } from '../stores/settingsStore'
+import { useProjectStore } from '../stores/projectStore'
+import { useTaskStore } from '../stores/taskStore'
+import {
+  createWorkspaceBackup,
+  downloadWorkspaceBackup,
+} from '../utils/workspaceBackup'
 import type { TaskPriority, TaskStatus } from '../types/task'
 
 const statusOptions: { value: TaskStatus; label: string }[] = [
@@ -40,6 +46,11 @@ function SettingsSection({
 
 export default function SettingsPage() {
   const settings = useSettingsStore()
+  const projects = useProjectStore((state) => state.projects)
+  const clearProjects = useProjectStore((state) => state.clearProjects)
+  const tasks = useTaskStore((state) => state.tasks)
+  const clearTasks = useTaskStore((state) => state.clearTasks)
+
   const [workspaceName, setWorkspaceName] = useState(settings.workspaceName)
   const [workspaceDescription, setWorkspaceDescription] = useState(
     settings.workspaceDescription,
@@ -52,6 +63,8 @@ export default function SettingsPage() {
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
   const [showResetConfirmation, setShowResetConfirmation] = useState(false)
+  const [showFullResetConfirmation, setShowFullResetConfirmation] =
+    useState(false)
 
   function handleSave(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -99,6 +112,40 @@ export default function SettingsPage() {
     setError('')
     setMessage('Your preferences have been restored to their defaults.')
     setShowResetConfirmation(false)
+  }
+
+  function handleFullReset() {
+    clearProjects()
+    clearTasks()
+    settings.resetSettings()
+
+    setWorkspaceName('Flowspace')
+    setWorkspaceDescription('Personal workspace')
+    setDefaultTaskStatus('todo')
+    setDefaultTaskPriority('medium')
+
+    setError('')
+    setMessage(
+      'Your workspace has been reset. All projects and tasks were deleted, and preferences were restored.',
+    )
+    setShowFullResetConfirmation(false)
+  }
+
+  function handleExport() {
+    const backup = createWorkspaceBackup({
+      projects,
+      tasks,
+      settings: {
+        workspaceName: settings.workspaceName,
+        workspaceDescription: settings.workspaceDescription,
+        defaultTaskStatus: settings.defaultTaskStatus,
+        defaultTaskPriority: settings.defaultTaskPriority,
+      },
+    })
+
+    downloadWorkspaceBackup(backup)
+    setMessage('Your workspace backup has been downloaded.')
+    setError('')
   }
 
   return (
@@ -288,6 +335,53 @@ export default function SettingsPage() {
         </div>
       </form>
 
+      <div className="mt-8">
+        <SettingsSection
+          title="Data management"
+          description="Keep a local backup of your Flowspace workspace data."
+        >
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 className="text-sm font-semibold text-ink-800">
+                Export workspace
+              </h3>
+              <p className="mt-1 max-w-xl text-sm leading-6 text-ink-500">
+                Download your projects, tasks, and saved preferences as a JSON
+                file. Keep the file somewhere safe so you have a copy of your
+                workspace.
+              </p>
+              <p className="mt-2 text-xs text-ink-500">
+                Includes {projects.length}{' '}
+                {projects.length === 1 ? 'project' : 'projects'} and{' '}
+                {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'}.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleExport}
+              className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink-800 transition hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 20 20"
+                fill="none"
+                className="h-4 w-4"
+              >
+                <path
+                  d="M10 2.75v9m0 0 3.25-3.25M10 11.75 6.75 8.5M3.75 12.75v3.5h12.5v-3.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              Export workspace
+            </button>
+          </div>
+        </SettingsSection>
+      </div>
+
       <div className="mt-8 rounded-2xl border border-amber-200 bg-amber-50/70 p-5 sm:p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
@@ -307,6 +401,29 @@ export default function SettingsPage() {
             className="min-h-10 shrink-0 rounded-xl border border-amber-300 bg-white px-4 py-2 text-sm font-semibold text-amber-800 transition hover:bg-amber-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
           >
             Reset preferences
+          </button>
+        </div>
+      </div>
+
+      <div className="mt-5 rounded-2xl border border-rose-200 bg-rose-50/70 p-5 sm:p-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <h2 className="text-base font-bold text-rose-900">
+              Reset entire workspace
+            </h2>
+            <p className="mt-1 max-w-xl text-sm leading-6 text-rose-800">
+              Permanently delete every project and task stored in this browser
+              and restore default workspace preferences. This action cannot be
+              undone. Export a backup first if you may need this data later.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setShowFullResetConfirmation(true)}
+            className="min-h-10 shrink-0 rounded-xl bg-rose-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-700"
+          >
+            Reset entire workspace
           </button>
         </div>
       </div>
@@ -357,6 +474,64 @@ export default function SettingsPage() {
                 className="min-h-10 rounded-xl bg-amber-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-amber-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700"
               >
                 Confirm reset
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {showFullResetConfirmation && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              setShowFullResetConfirmation(false)
+            }
+          }}
+        >
+          <section
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="full-reset-title"
+            aria-describedby="full-reset-description"
+            className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl"
+          >
+            <h2
+              id="full-reset-title"
+              className="text-lg font-bold text-rose-900"
+            >
+              Delete all workspace data?
+            </h2>
+
+            <p
+              id="full-reset-description"
+              className="mt-2 text-sm leading-6 text-ink-600"
+            >
+              This will permanently delete all {projects.length}{' '}
+              {projects.length === 1 ? 'project' : 'projects'} and {tasks.length}{' '}
+              {tasks.length === 1 ? 'task' : 'tasks'}, then restore the default
+              workspace preferences. You cannot undo this action.
+            </p>
+
+            <p className="mt-3 text-sm font-semibold text-rose-800">
+              If you want to keep your data, cancel and export a backup first.
+            </p>
+
+            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+              <button
+                type="button"
+                onClick={() => setShowFullResetConfirmation(false)}
+                className="min-h-10 rounded-xl border border-line px-4 py-2 text-sm font-semibold text-ink-600 transition hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                onClick={handleFullReset}
+                className="min-h-10 rounded-xl bg-rose-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-700"
+              >
+                Yes, delete everything
               </button>
             </div>
           </section>
